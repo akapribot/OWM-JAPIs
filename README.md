@@ -1,4 +1,4 @@
-<h1>OpenWeatherMap JAPIs</h1>
+<h1>OpenWeatherMap.org JAPIs</h1>
 
 <h4>Java APIs for OpenWeatherMap.org</h4>
 
@@ -18,6 +18,7 @@ easy-to-use APIs written in Java. You can use this library to create weather app
 1. Current Weather
 2. Weather Forecasts
 3. Daily Forecasts
+4. Wind degree to direction converter
 
 <h5>Not implemented (planned):</h5>
 1. Searching of City
