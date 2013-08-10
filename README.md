@@ -1,10 +1,12 @@
-<h1>OpenWeatherMap.org JAPIs</h1>
+<h1>OWM JAPIs</h1>
 
 <h4>Java APIs for OpenWeatherMap.org</h4>
 
 OpenWeatherMap.org JAPIs lets you easily access information about current weather, weather forecasts, 
 daily forecasts, etc. directly from OpenWeatherMap.org by providing direct, easy-to-configure, and 
-easy-to-use APIs written in Java. You can use this library to create weather applications using Java.
+easy-to-use APIs written in Java. 
+
+You can use this library to create weather applications using Java.
 
 
 
@@ -29,13 +31,43 @@ easy-to-use APIs written in Java. You can use this library to create weather app
 
 
 <h2>Why to use OWM JAPIs?</h2>
-1. Easy to use
-2. Minimize your code
-3. Lessen your efforts
+1. Free
+2. Easy to use
+3. Minimize your code
+4. Lessen your efforts
 
 Using OWM JAPIs, you only need to focus on your application and its user interface, and you can just leave 
 the work of accessing weather and forecast data from OpenWeatherMap.org on this library. This reduces code 
 in your program and improves the readability and performance of your code.
+
+
+
+<h2>How to use OWM JAPIs?</h2>
+Add OWM_JAPIs.jar and JSON.jar to your project's libararies directory, and then, code this way:
+
+1. Create and initialize object of OpenWeatherMap
+2. Call this object's functions to get desired data (current weather, forecast, etc.)
+3. This object's functions returns desired data in a new object
+4. Call this new object's functions to get information about weather
+
+Using OWM JAPIs is very simple, and anyone with little coding knowledge will feel at home while making use 
+of this library. Identifiers are written to be self-explanatory and java documentation is also provided.
+
+
+
+<h2>Bugs / Requests</h2>
+Got a problem, error, or bug in the library? Or want a new feature that's not there in OWM JAPIs?
+
+Let me know about it, and I will try to solve/add it in the next release.
+
+Kindly post bugs or feature requests at http://go.aksingh.net/owm-japi-bugs
+
+
+
+<h2>Credits</h2>
+1. OpenWeatherMap.org
+
+for providing free weather data and creating easy-to-use web APIs.
 
 
 
