@@ -60,7 +60,7 @@ Got a problem, error, or bug in the library? Or want a new feature that's not th
 
 Let me know about it, and I will try to solve/add it in the next release.
 
-Kindly post bugs or feature requests at http://go.aksingh.net/owm-japi-bugs
+Kindly post bugs or feature requests at http://go.aksingh.net/owm-japis-bugs
 
 
 
