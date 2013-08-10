@@ -2,7 +2,7 @@
 
 <h4>Java APIs for OpenWeatherMap.org</h4>
 
-OpenWeatherMap.org JAPIs lets you easily access information about current weather, weather forecasts, 
+OWM JAPIs lets you easily access information about current weather, weather forecasts, 
 daily forecasts, etc. directly from OpenWeatherMap.org by providing direct, easy-to-configure, and 
 easy-to-use APIs written in Java. 
 
