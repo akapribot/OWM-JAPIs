@@ -11,7 +11,7 @@ You can use this library to create weather applications using Java.
 
 
 ##Downloads
-Kindly download the library's binaries from http://go.aksingh.net/owm-japis-downloads
+Kindly download the library's binaries from [OWM APIs Downloads](http://go.aksingh.net/owm-japis-downloads).
 
 
 
@@ -63,7 +63,7 @@ of this library. Identifiers are written to be self-explanatory and java documen
 
 
 ##Source code
-Kindly get the library's source code from http://go.aksingh.net/owm-japis-src
+Kindly get the library's source code from [OWM APIs Source](http://go.aksingh.net/owm-japis-src).
 
 
 
@@ -72,14 +72,14 @@ Got a problem, error, or bug in the library? Or want a new feature that's not th
 
 Let me know about it, and I will try to solve/add it in the next release.
 
-Kindly post bugs or feature requests at http://go.aksingh.net/owm-japis-bugs
+Kindly post bugs or feature requests at [OWM APIs Bugs/Requests](http://go.aksingh.net/owm-japis-bugs).
 
 
 
 ##Developer
 **Ashutosh Kumar Singh**
 
-Homepage: http://www.aksingh.net
+Homepage: [AKSingh.net](http://www.aksingh.net)
 
 Email: me@aksingh.net
 
