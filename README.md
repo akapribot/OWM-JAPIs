@@ -1,6 +1,6 @@
-<h1>OWM JAPIs</h1>
+#OWM JAPIs
 
-<h4>Java APIs for OpenWeatherMap.org</h4>
+####Java APIs for OpenWeatherMap.org
 
 OWM JAPIs lets you easily access information about current weather, weather forecasts, 
 daily forecasts, etc. directly from OpenWeatherMap.org by providing direct, easy-to-configure, and 
@@ -10,24 +10,26 @@ You can use this library to create weather applications using Java.
 
 
 
-<h2>Downloads</h2>
+##Downloads
 Kindly download the library's binaries from http://go.aksingh.net/owm-japis-downloads
 
 
 
-<h2>Versions</h2>
-<h3>2.5 (Compatible with OWM APIs v2.5)</h3>
+##Versions
+###2.5 (Compatible with OWM APIs v2.5)
 
 
-<h4>2.5.0.1 (latest)</h4>
+####2.5.0.1 (latest)
 
-<h5>Implemented:</h5>
+**Implemented:**
+
 1. Current Weather
 2. Weather Forecasts
 3. Daily Forecasts
 4. Wind degree to direction converter
 
-<h5>Not implemented (planned):</h5>
+**Not implemented (planned):**
+
 1. Searching of City
 2. Weather Maps
 3. Country code to name converter
@@ -35,7 +37,7 @@ Kindly download the library's binaries from http://go.aksingh.net/owm-japis-down
 
 
 
-<h2>Why to use OWM JAPIs?</h2>
+##Why to use OWM JAPIs?
 1. Free
 2. Easy to use
 3. Minimize your code
@@ -47,7 +49,7 @@ in your program and improves the readability and performance of your code.
 
 
 
-<h2>How to use OWM JAPIs?</h2>
+##How to use OWM JAPIs?
 Add OWM_JAPIs.jar and JSON.jar to your project's libararies directory, and then, code this way:
 
 1. Create and initialize object of OpenWeatherMap
@@ -60,12 +62,12 @@ of this library. Identifiers are written to be self-explanatory and java documen
 
 
 
-<h2>Source code</h2>
+##Source code
 Kindly get the library's source code from http://go.aksingh.net/owm-japis-src
 
 
 
-<h2>Bugs / Requests</h2>
+##Bugs / Requests
 Got a problem, error, or bug in the library? Or want a new feature that's not there in OWM JAPIs?
 
 Let me know about it, and I will try to solve/add it in the next release.
@@ -74,8 +76,8 @@ Kindly post bugs or feature requests at http://go.aksingh.net/owm-japis-bugs
 
 
 
-<h2>Developer</h2>
-Ashutosh Kumar Singh
+##Developer
+**Ashutosh Kumar Singh**
 
 Homepage: http://www.aksingh.net
 
@@ -83,14 +85,14 @@ Email: me@aksingh.net
 
 
 
-<h2>Credits</h2>
+##Credits
 1. OpenWeatherMap.org
 
 for providing free weather data and creating easy-to-use web APIs.
 
 
 
-<h2>License</h2>
+##License
 Copyright (C)2013 Ashutosh Kumar Singh [me@AKSingh.net]
   
 Permission is hereby granted, free of charge, to any person obtaining 
