@@ -1,5 +1,5 @@
 /*
- * Copyright (C)2013 Ashutosh Kumar Singh [me@AKSingh.net]
+ * Copyright (C)2013-2014 Ashutosh Kumar Singh [me@AKSingh.net]
  * 
  * Permission is hereby granted, free of charge, to any person obtaining 
  * a copy of this software and associated documentation files (the "Software"), 
@@ -10,8 +10,6 @@
  * 
  * The above copyright notice and this permission notice shall be included 
  * in all copies or substantial portions of the Software.
- * 
- * The Software shall be used for Good, not Evil.
  * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
@@ -32,7 +30,7 @@ import java.util.Scanner;
 /**
  * Provides various tools, which help doing tasks in this application. 
  * For example, tool for downloading content from the Internet, tool for 
- * correcting and stricting web addresses, etc.
+ * correcting, etc.
  * 
  * <p>Note: This class directly do not provide any functions, but has 
  * <code>static</code> sub-classes which provide various 
@@ -40,7 +38,7 @@ import java.util.Scanner;
  * classes.
  * 
  * @author Ashutosh Kumar Singh
- * @version 2013-08-05
+ * @version 2014-07-01
  * @since 2.5.0.1
  */
 public class Tools {
@@ -93,39 +91,6 @@ public class Tools {
     
     
     /**
-     * Provides functions to handle HTML, e.g., correcting 
-     * non-compliant or non-strict web addresses, etc.
-     * 
-     * @author Ashutosh Kumar Singh
-     * @version 2013/08/05
-     * @since 2.5.0.1
-     */
-    public static class HTML {
-
-        /**
-         * Stricts a non-strict or non-compliant web address 
-         * to a proper URL.
-         *
-         * <p>Note: This function checks and stricts only some parts of the 
-         * URL, which are necessary to be corrected for accessing data from 
-         * the OpenWeatherMap.org
-         * 
-         * @param inputString String to be converted to strict HTML address
-         * @return HTML standards-followed and stricted URL
-         */
-        public static String strictAddress(String inputString) {
-            String outputString = "";
-
-            if (inputString != null) {
-                outputString = inputString.replace(" ", "%20").replace(".", "%2E");
-            }
-            
-            return outputString;
-        }
-    }
-    
-    
-    /**
      * Provides methods to do conversions.
      * For example, converting degree to direction, etc.
      * 
@@ -137,6 +102,7 @@ public class Tools {
         
         /**
          * Converts degree to direction.
+         * @param degree
          * @return Direction
          * 
          * @throws IllegalArgumentException
