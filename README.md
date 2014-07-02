@@ -29,6 +29,7 @@ Download the library's source and binaries from [OWM JAPIs Downloads][1].
 ####2.5.0.2 (latest)
 
 **Bug-fix version:**
+
 1. Fixed bugs which caused wrong parsing of date and time.
 2. Improved code formatting and readability (for developers).
 
@@ -36,12 +37,14 @@ Download the library's source and binaries from [OWM JAPIs Downloads][1].
 ####2.5.0.1
 
 **Implemented:**
+
 1. Current Weather
 2. Weather Forecasts
 3. Daily Forecasts
 4. Wind degree to direction converter
 
 **Not implemented but planned:**
+
 1. Searching of City
 2. Weather Maps
 3. Country code to name converter
@@ -67,7 +70,7 @@ Kindly have a look on the example below for a clear understanding.
 
 ##Example
 ### Basic Example
-####Source Code
+####Sample Code
 
     import java.io.IOException;
     import java.net.MalformedURLException;
@@ -108,7 +111,7 @@ Professionally, you should always **write code which can handle errors/exception
 
 Using OWM JAPIs, you can always check if a particular data is available or not. This is done by using the **has&lt;data-name&gt;()** functions. For example, **hasResponseCode()** function checks if the retrieved data has a response code or not; and if available, response code can be used to check if the whole data was downloaded and parsed correctly or not, as shown below in the example.
 
-####Source Code
+####Sample Code
 
     import java.io.IOException;
     import java.net.MalformedURLException;
@@ -116,7 +119,7 @@ Using OWM JAPIs, you can always check if a particular data is available or not. 
     import net.aksingh.java.api.owm.OpenWeatherMap;
     import org.json.JSONException;
     
-    public class OwmJapisTest {
+    public class OwmJapisExample2 {
     
         public static void main(String[] args)
                 throws IOException, MalformedURLException, JSONException {
