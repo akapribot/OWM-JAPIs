@@ -535,6 +535,14 @@ public class DailyForecastData {
          * Key for JSON variable <code>Percentage of clouds</code>
          */
         private final String JSON_FORECAST_CLOUDS = "clouds";
+        /**
+         * Key for JSON variable <code>Rain precipitation</code>
+         */
+        private final String JSON_FORECAST_RAIN = "rain";
+        /**
+         * Key for JSON variable <code>Snow precipitation</code>
+         */
+        private final String JSON_FORECAST_SNOW = "snow";
 
         /**
          * Pressure
@@ -556,6 +564,14 @@ public class DailyForecastData {
          * Percentage of clouds
          */
         private final float cloudsPercent;
+        /**
+         * Precipitation of rain in mm.
+         */
+        private final float rain;
+        /**
+         * Precipitation of snow in mm.
+         */
+        private final float snow;
 
         private final Temperature temp;
 
@@ -567,7 +583,6 @@ public class DailyForecastData {
          * Count (number) of elements in list of weather information
          */
         private final int weatherListCount;
-
         /**
          * Non-parameterized constructor
          * <p>
@@ -586,6 +601,8 @@ public class DailyForecastData {
             this.windSpeed = Float.NaN;
             this.windDegree = Float.NaN;
             this.cloudsPercent = Float.NaN;
+            this.rain = Float.NaN;
+            this.snow = Float.NaN;
 
             this.temp = new Temperature();
 
@@ -611,6 +628,8 @@ public class DailyForecastData {
             this.windSpeed = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_FORECAST_WIND_SPEED, Double.NaN) : Float.NaN;
             this.windDegree = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_FORECAST_WIND_DEGREE, Double.NaN) : Float.NaN;
             this.cloudsPercent = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_FORECAST_CLOUDS, Double.NaN) : Float.NaN;
+            this.rain = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_FORECAST_RAIN, Double.NaN) : Float.NaN;
+            this.snow = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_FORECAST_SNOW, Double.NaN) : Float.NaN;
 
             JSONArray jsonArrWeather = (jsonObj != null) ? jsonObj.optJSONArray(this.JSON_WEATHER) : null;
             this.weatherList = (jsonArrWeather != null) ? new ArrayList<Weather>(jsonArrWeather.length()) : Collections.EMPTY_LIST;
@@ -645,6 +664,14 @@ public class DailyForecastData {
             return (this.cloudsPercent != Float.NaN);
         }
 
+        public boolean hasRain() {
+            return (this.rain != Float.NaN);
+        }
+
+        public boolean hasSnow() {
+            return (this.snow != Float.NaN);
+        }
+
         public float getHumidity() {
             return this.humidity;
         }
@@ -663,6 +690,14 @@ public class DailyForecastData {
 
         public float getPercentageOfClouds() {
             return this.cloudsPercent;
+        }
+
+        public float getRain() {
+            return this.rain;
+        }
+
+        public float getSnow() {
+            return this.snow;
         }
 
         // Objects
