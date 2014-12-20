@@ -40,6 +40,8 @@ import org.json.JSONObject;
  */
 public class OpenWeatherMap {
 
+    private static final String ENCODING = "UTF-8";
+
     public static enum OWM_URL {
         // Base URL for OpenWeatherMap.org API 2.5
 
@@ -103,7 +105,7 @@ public class OpenWeatherMap {
             String address = OWM_URL.BASE_URL.getParameter()
                              + OWM_URL.PARAMETER_CURRENT_WEATHER.getParameter()
                              + OWM_URL.PARAMETER_CITY_NAME.getParameter()
-                             + URLEncoder.encode(cityName, "US-ASCII") + "&"
+                             + URLEncoder.encode(cityName, ENCODING) + "&"
                              + OWM_URL.PARAMETER_MODE.getParameter()
                              + this.OWM_MODE_VALUE + "&"
                              + OWM_URL.PARAMETER_UNITS.getParameter()
@@ -124,7 +126,7 @@ public class OpenWeatherMap {
             address = OWM_URL.BASE_URL.getParameter()
                       + OWM_URL.PARAMETER_CURRENT_WEATHER.getParameter()
                       + OWM_URL.PARAMETER_CITY_NAME.getParameter()
-                      + URLEncoder.encode(cityName, "US-ASCII")
+                      + URLEncoder.encode(cityName, ENCODING)
                       + "," + countryCode + "&"
                       + OWM_URL.PARAMETER_MODE.getParameter()
                       + this.OWM_MODE_VALUE + "&"
@@ -190,7 +192,7 @@ public class OpenWeatherMap {
             address = OWM_URL.BASE_URL.getParameter()
                       + OWM_URL.PARAMETER_FORECAST_WEATHER.getParameter()
                       + OWM_URL.PARAMETER_CITY_NAME.getParameter()
-                      + URLEncoder.encode(cityName, "US-ASCII") + "&"
+                      + URLEncoder.encode(cityName, ENCODING) + "&"
                       + OWM_URL.PARAMETER_MODE.getParameter()
                       + this.OWM_MODE_VALUE + "&"
                       + OWM_URL.PARAMETER_UNITS.getParameter()
@@ -211,7 +213,7 @@ public class OpenWeatherMap {
             address = OWM_URL.BASE_URL.getParameter()
                       + OWM_URL.PARAMETER_FORECAST_WEATHER.getParameter()
                       + OWM_URL.PARAMETER_CITY_NAME.getParameter()
-                      + URLEncoder.encode(cityName, "US-ASCII")
+                      + URLEncoder.encode(cityName, ENCODING)
                       + "," + countryCode + "&"
                       + OWM_URL.PARAMETER_MODE.getParameter()
                       + this.OWM_MODE_VALUE + "&"
@@ -277,7 +279,7 @@ public class OpenWeatherMap {
             address = OWM_URL.BASE_URL.getParameter()
                       + OWM_URL.PARAMETER_DAILY_FORECAST.getParameter()
                       + OWM_URL.PARAMETER_CITY_NAME.getParameter()
-                      + URLEncoder.encode(cityName, "US-ASCII") + "&"
+                      + URLEncoder.encode(cityName, ENCODING) + "&"
                       + OWM_URL.PARAMETER_COUNT.getParameter()
                       + Byte.toString(count) + "&"
                       + OWM_URL.PARAMETER_MODE.getParameter()
@@ -300,7 +302,7 @@ public class OpenWeatherMap {
             address = OWM_URL.BASE_URL.getParameter()
                       + OWM_URL.PARAMETER_DAILY_FORECAST.getParameter()
                       + OWM_URL.PARAMETER_CITY_NAME.getParameter()
-                      + URLEncoder.encode(cityName, "US-ASCII")
+                      + URLEncoder.encode(cityName, ENCODING)
                       + "," + countryCode + "&"
                       + OWM_URL.PARAMETER_COUNT.getParameter()
                       + Byte.toString(count) + "&"
