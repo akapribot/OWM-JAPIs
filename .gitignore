@@ -1,7 +1,9 @@
 lib/nblibraries.properties
 nbproject/
-lib/CopyLibs/org-netbeans-modules-java-j2seproject-copylibstask.jar
 /build/
 build.xml
 /lib/CopyLibs/
 /dist/
+/.gradle/
+/.idea/
+owm-japis.iml
