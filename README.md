@@ -198,7 +198,7 @@ Kindly post bugs or feature requests at [OWM JAPIs Bugs/Requests][3] and I will 
 
 
 ##Developer
-**Ashutosh Kumar Singh** | [AKSingh.net][4] | me@aksingh.net
+**Ashutosh Kumar Singh** | [AKSingh.net][4] | [me@aksingh.net][9]
 
 
 
@@ -218,9 +218,9 @@ for reporting bugs, and even finding and sharing possible solutions for them.
 
 
 ##License
-Copyright (c) 2013-2014 Ashutosh Kumar Singh <me@aksingh.net>
+Copyright (c) 2013-2014 Ashutosh Kumar Singh `<me@aksingh.net>`
   
-Released under the terms of [MIT license][7]. It's open source and developer-friendly.
+Released under the terms of the [MIT license][7]. It's open source and developer-friendly.
 
 
   [1]: http://go.aksingh.net/owm-japis-downloads
@@ -231,3 +231,4 @@ Released under the terms of [MIT license][7]. It's open source and developer-fri
   [6]: http://www.json.org/java/index.html
   [7]: http://opensource.org/licenses/MIT
   [8]: https://github.com/dvdme/forecastio-lib-java
+  [9]: mailto:me@aksingh.net

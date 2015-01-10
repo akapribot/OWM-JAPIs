@@ -43,6 +43,24 @@ public class CurrentWeatherTest {
             System.out.println("Reponse is inValid!");
         } else {
             System.out.println("Reponse is Valid!");
+            System.out.println();
+
+            if (cw.hasBaseStation()) {
+                System.out.println("Base station: " + cw.getBaseStation());
+            }
+            if (cw.hasDateTime()) {
+                System.out.println("Date time: " + cw.getDateTime());
+            }
+            System.out.println();
+
+
+            if (cw.hasCityCode()) {
+                System.out.println("City code: " + cw.getCityCode());
+            }
+            if (cw.hasCityName()) {
+                System.out.println("City name: " + cw.getCityName());
+            }
+            System.out.println();
         }
     }
 }

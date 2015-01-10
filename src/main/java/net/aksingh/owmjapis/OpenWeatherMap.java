@@ -33,6 +33,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.Inflater;
+import java.util.zip.InflaterInputStream;
 
 /**
  * <p>
@@ -614,21 +616,23 @@ public class OpenWeatherMap {
                 connection.setUseCaches(false);
                 connection.setDoInput(true);
                 connection.setDoOutput(false);
-                connection.setRequestProperty("Accept-Encoding", "gzip");
+                connection.setRequestProperty("Accept-Encoding", "gzip, deflate");
                 connection.connect();
 
                 if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    String encoding = connection.getContentEncoding();
+
                     try {
-                        if (connection.getRequestProperty("Accept-Encoding") != null) {
+                        if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
                             reader = new BufferedReader(new InputStreamReader(new GZIPInputStream(connection.getInputStream())));
-                            while ((s = reader.readLine()) != null) {
-                                response = s;
-                            }
+                        } else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
+                            reader = new BufferedReader(new InputStreamReader(new InflaterInputStream(connection.getInputStream(), new Inflater(true))));
                         } else {
                             reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                            while ((s = reader.readLine()) != null) {
-                                response = s;
-                            }
+                        }
+
+                        while ((s = reader.readLine()) != null) {
+                            response = s;
                         }
                     } catch (IOException e) {
                         System.err.println("Error: " + e.getMessage());
@@ -644,8 +648,9 @@ public class OpenWeatherMap {
                 } else { // if HttpURLConnection is not okay
                     try {
                         reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-                        while ((s = reader.readLine()) != null)
+                        while ((s = reader.readLine()) != null) {
                             response = s;
+                        }
                     } catch (IOException e) {
                         System.err.println("Error: " + e.getMessage());
                     } finally {
