@@ -49,7 +49,7 @@ import java.util.zip.InflaterInputStream;
  * </p>
  *
  * @author Ashutosh Kumar Singh <me@aksingh.net>
- * @version 12/19/2014
+ * @version 2015-01-17
  * @see <a href="http://openweathermap.org/">OpenWeatherMap.org</a>
  * @see <a href="http://openweathermap.org/api">OpenWeatherMap.org API</a>
  * @since 2.5.0.1
@@ -71,7 +71,7 @@ public class OpenWeatherMap {
     private static final String PARAM_MODE = "mode=";
     private static final String PARAM_UNITS = "units=";
     private static final String PARAM_APPID = "appId=";
-    private static final String PARAM_LANG = "unit=";
+    private static final String PARAM_LANG = "lang=";
 
     /*
     Instance Variables
@@ -623,9 +623,9 @@ public class OpenWeatherMap {
                     String encoding = connection.getContentEncoding();
 
                     try {
-                        if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
+                        if (encoding != null && "gzip".equalsIgnoreCase(encoding)) {
                             reader = new BufferedReader(new InputStreamReader(new GZIPInputStream(connection.getInputStream())));
-                        } else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
+                        } else if (encoding != null && "deflate".equalsIgnoreCase(encoding)) {
                             reader = new BufferedReader(new InputStreamReader(new InflaterInputStream(connection.getInputStream(), new Inflater(true))));
                         } else {
                             reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
