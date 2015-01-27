@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2014 Ashutosh Kumar Singh <me@aksingh.net>
+ * Copyright (c) 2013-2015 Ashutosh Kumar Singh <me@aksingh.net>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,8 @@ package net.aksingh.owmjapis;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * <p>
  * Provides default behaviours and implementations for the response from OWM.org
@@ -33,7 +35,7 @@ import org.json.JSONObject;
  * @version 2014/12/28
  * @since 2.5.0.3
  */
-abstract class AbstractResponse {
+abstract class AbstractResponse implements Serializable {
     /*
     Instance variables
      */

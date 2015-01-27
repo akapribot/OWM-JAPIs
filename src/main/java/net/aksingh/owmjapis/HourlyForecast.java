@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2014 Ashutosh Kumar Singh <me@aksingh.net>
+ * Copyright (c) 2013-2015 Ashutosh Kumar Singh <me@aksingh.net>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,7 @@ package net.aksingh.owmjapis;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -321,7 +322,7 @@ public class HourlyForecast extends AbstractForecast {
          * @version 2014/12/26
          * @since 2.5.0.1
          */
-        public static class Sys {
+        public static class Sys implements Serializable {
             private final String JSON_SYS_POD = "pod";
             private final String pod;
 

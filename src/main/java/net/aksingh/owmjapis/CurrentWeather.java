@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2014 Ashutosh Kumar Singh <me@aksingh.net>
+ * Copyright (c) 2013-2015 Ashutosh Kumar Singh <me@aksingh.net>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,7 @@ package net.aksingh.owmjapis;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -49,6 +50,15 @@ import java.util.Date;
  */
 public class CurrentWeather extends AbstractWeather {
     /*
+    JSON Keys
+     */
+    private static final String JSON_RAIN = "rain";
+    private static final String JSON_SYS = "sys";
+    private static final String JSON_BASE = "base";
+    private static final String JSON_CITY_ID = "id";
+    private static final String JSON_CITY_NAME = "name";
+
+    /*
     Instance variables
      */
     private final String base;
@@ -67,12 +77,6 @@ public class CurrentWeather extends AbstractWeather {
      */
     CurrentWeather(JSONObject jsonObj) {
         super(jsonObj);
-
-        final String JSON_RAIN = "rain";
-        final String JSON_SYS = "sys";
-        final String JSON_BASE = "base";
-        final String JSON_CITY_ID = "id";
-        final String JSON_CITY_NAME = "name";
 
         this.base = (jsonObj != null) ? jsonObj.optString(JSON_BASE, null) : null;
         this.cityId = (jsonObj != null) ? jsonObj.optLong(JSON_CITY_ID, Long.MIN_VALUE) : Long.MIN_VALUE;
@@ -336,9 +340,9 @@ public class CurrentWeather extends AbstractWeather {
      * @version 2014/12/26
      * @since 2.5.0.1
      */
-    public static class Rain {
+    public static class Rain implements Serializable {
 
-        private final String JSON_RAIN_1HOUR = "1h";
+        private static final String JSON_RAIN_1HOUR = "1h";
 
         private final float rain1h;
 
@@ -379,14 +383,14 @@ public class CurrentWeather extends AbstractWeather {
      * @version 2014/12/26
      * @since 2.5.0.1
      */
-    public static class Sys {
+    public static class Sys implements Serializable {
 
-        private final String JSON_SYS_TYPE = "type";
-        private final String JSON_SYS_ID = "id";
-        private final String JSON_SYS_MESSAGE = "message";
-        private final String JSON_SYS_COUNTRY_CODE = "country";
-        private final String JSON_SYS_SUNRISE = "sunrise";
-        private final String JSON_SYS_SUNSET = "sunset";
+        private static final String JSON_SYS_TYPE = "type";
+        private static final String JSON_SYS_ID = "id";
+        private static final String JSON_SYS_MESSAGE = "message";
+        private static final String JSON_SYS_COUNTRY_CODE = "country";
+        private static final String JSON_SYS_SUNRISE = "sunrise";
+        private static final String JSON_SYS_SUNSET = "sunset";
 
         private final int type;
         private final int id;
@@ -510,7 +514,7 @@ public class CurrentWeather extends AbstractWeather {
      */
     public static class Wind extends AbstractWeather.Wind {
 
-        private final String JSON_WIND_GUST = "gust";
+        private static final String JSON_WIND_GUST = "gust";
 
         private final float gust;
 

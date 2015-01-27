@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2014 Ashutosh Kumar Singh <me@aksingh.net>
+ * Copyright (c) 2013-2015 Ashutosh Kumar Singh <me@aksingh.net>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,7 @@ package net.aksingh.owmjapis;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -45,10 +46,12 @@ public abstract class AbstractWeather extends AbstractResponse {
     /*
     JSON Keys
      */
-    final String JSON_CLOUDS = "clouds";
-    final String JSON_COORD = "coord";
-    final String JSON_MAIN = "main";
-    final String JSON_WIND = "wind";
+    static final String JSON_CLOUDS = "clouds";
+    static final String JSON_COORD = "coord";
+    static final String JSON_MAIN = "main";
+    static final String JSON_WIND = "wind";
+    private static final String JSON_WEATHER = "weather";
+    private static final String JSON_DATE_TIME = "dt";
 
     /*
     Instance variables
@@ -71,9 +74,6 @@ public abstract class AbstractWeather extends AbstractResponse {
 
     AbstractWeather(JSONObject jsonObj) {
         super(jsonObj);
-
-        final String JSON_WEATHER = "weather";
-        final String JSON_DATE_TIME = "dt";
 
         long sec = (jsonObj != null) ? jsonObj.optLong(JSON_DATE_TIME, Long.MIN_VALUE) : Long.MIN_VALUE;
         if (sec != Long.MIN_VALUE) { // converting seconds to Date object
@@ -147,8 +147,8 @@ public abstract class AbstractWeather extends AbstractResponse {
      * @version 2013/12/23
      * @since 2.5.0.1
      */
-    abstract public static class Clouds {
-        private final String JSON_CLOUDS_ALL = "all";
+    abstract public static class Clouds implements Serializable {
+        private static final String JSON_CLOUDS_ALL = "all";
 
         private final float percentOfClouds;
 
@@ -186,9 +186,9 @@ public abstract class AbstractWeather extends AbstractResponse {
      * @version 2013/12/23
      * @since 2.5.0.1
      */
-    abstract public static class Coord {
-        private final String JSON_COORD_LATITUDE = "lat";
-        private final String JSON_COORD_LONGITUDE = "lon";
+    abstract public static class Coord implements Serializable {
+        private static final String JSON_COORD_LATITUDE = "lat";
+        private static final String JSON_COORD_LONGITUDE = "lon";
 
         private final float lat;
         private final float lon;
@@ -245,13 +245,13 @@ public abstract class AbstractWeather extends AbstractResponse {
      * @version 2013/12/23
      * @since 2.5.0.1
      */
-    abstract public static class Main {
+    abstract public static class Main implements Serializable {
 
-        private final String JSON_MAIN_TEMP = "temp";
-        private final String JSON_MAIN_TEMP_MIN = "temp_min";
-        private final String JSON_MAIN_TEMP_MAX = "temp_max";
-        private final String JSON_MAIN_PRESSURE = "pressure";
-        private final String JSON_MAIN_HUMIDITY = "humidity";
+        private static final String JSON_MAIN_TEMP = "temp";
+        private static final String JSON_MAIN_TEMP_MIN = "temp_min";
+        private static final String JSON_MAIN_TEMP_MAX = "temp_max";
+        private static final String JSON_MAIN_PRESSURE = "pressure";
+        private static final String JSON_MAIN_HUMIDITY = "humidity";
 
         private final float temp;
         private final float minTemp;
@@ -376,11 +376,11 @@ public abstract class AbstractWeather extends AbstractResponse {
      * @version 2014/12/27
      * @since 2.5.0.3
      */
-    public static class Weather {
-        private final String JSON_WEATHER_ID = "id";
-        private final String JSON_WEATHER_MAIN = "main";
-        private final String JSON_WEATHER_DESCRIPTION = "description";
-        private final String JSON_WEATHER_ICON = "icon";
+    public static class Weather implements Serializable {
+        private static final String JSON_WEATHER_ID = "id";
+        private static final String JSON_WEATHER_MAIN = "main";
+        private static final String JSON_WEATHER_DESCRIPTION = "description";
+        private static final String JSON_WEATHER_ICON = "icon";
 
         private final int id;
         private final String name;
@@ -475,9 +475,9 @@ public abstract class AbstractWeather extends AbstractResponse {
      * @version 2013/12/23
      * @since 2.5.0.1
      */
-    abstract public static class Wind {
-        private final String JSON_WIND_SPEED = "speed";
-        private final String JSON_WIND_DEGREE = "deg";
+    abstract public static class Wind implements Serializable {
+        private static final String JSON_WIND_SPEED = "speed";
+        private static final String JSON_WIND_DEGREE = "deg";
 
         private final float speed;
         private final float degree;

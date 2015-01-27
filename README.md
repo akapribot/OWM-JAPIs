@@ -1,10 +1,10 @@
 #OWM JAPIs
 
-####Java Wrapper Library for OpenWeatherMap.org Web APIs
+####Java Library for OpenWeatherMap.org Weather APIs
 
-Create weather-aware applications for **Java and Android platforms** in minimum time using OWM JAPIs, an easy-to-use, detailed and documented weather API library for retrieving weather data from OpenWeatherMap.org. You can easily **retrieve and use weather data** in your applications using this library.
+Create weather-aware applications for **Java and Android platforms** in minimum time using OWM JAPIs, an easy-to-use, detailed and documented weather APIs wrapper library for retrieving weather data from OpenWeatherMap.org. You can easily **retrieve and use weather data** in your applications using this library.
 
-OWM JAPIs lets you **get weather data in only 3-5 lines of code** (excluding any other/skeleton code, of course). You can develop applications for multiple platforms using this library, such as Windows, Mac OS X, Linux, and Android.
+OWM JAPIs lets you **get weather data in only 3-5 lines of code** (excluding any other/skeleton code, of course). You can develop applications and services for multiple platforms using Java and this library, such as Windows, Mac OS X, Linux, and Android.
 
 
 
@@ -20,13 +20,24 @@ OWM JAPIs lets you **focus just on your application's logic** and **weather retr
 ##Downloads
 Download the library's source and binaries from [OWM JAPIs Downloads][1].
 
+Use Maven, Gradle or an build tool? [OWM JAPIs is available in Maven Central repository][10].
+
 
 
 ##Versions
 ###2.5 (Compatible with OpenWeatherMap.org's API v2.5)
 
 
-####2.5.0.3 (latest)
+####2.5.0.4 (latest)
+
+**Bug-fix version:**
+
+1. Fixed lang parameter bug.
+2. Library supports serialization and parcelization.
+3. Uploaded the library to Maven Central repository.
+
+
+####2.5.0.3
 
 **Implemented:**
 
@@ -232,3 +243,4 @@ Released under the terms of the [MIT license][7]. It's open source and developer
   [7]: http://opensource.org/licenses/MIT
   [8]: https://github.com/dvdme/forecastio-lib-java
   [9]: mailto:me@aksingh.net
+  [10]: http://search.maven.org/#search%7Cga%7C1%7Cowm-japis

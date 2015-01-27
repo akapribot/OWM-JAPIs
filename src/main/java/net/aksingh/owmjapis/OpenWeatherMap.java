@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2014 Ashutosh Kumar Singh <me@aksingh.net>
+ * Copyright (c) 2013-2015 Ashutosh Kumar Singh <me@aksingh.net>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,11 @@ import java.util.zip.InflaterInputStream;
 
 /**
  * <p>
- * Lets you access data from OpenWeatherMap.org using its Web APIs.
+ *     <b>The starting point for all API operations.</b>
+ *     If you're new to this API, read the docs for this class first.
+ * </p>
+ * <p>
+ * Lets you access data from OpenWeatherMap.org using its Weather APIs.
  * Henceforth, it's shortened as OWM.org to ease commenting.
  * </p>
  * <p>
@@ -320,8 +324,8 @@ public class OpenWeatherMap {
      * @since 2.5.0.3
      */
     public static class OWMAddress {
-        private final String MODE = "json";
-        private final String ENCODING = "UTF-8";
+        private static final String MODE = "json";
+        private static final String ENCODING = "UTF-8";
 
         private String mode;
         private Units units;
@@ -548,7 +552,7 @@ public class OpenWeatherMap {
         }
 
         /*
-        Responses for daily forecasts
+        Responses for hourly forecasts
          */
         public String hourlyForecastByCityName(String cityName) throws UnsupportedEncodingException {
             String address = owmAddress.hourlyForecastByCityName(cityName);
@@ -605,7 +609,7 @@ public class OpenWeatherMap {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
 
-            String s;
+            String tmpStr;
             String response = null;
 
             try {
@@ -631,8 +635,8 @@ public class OpenWeatherMap {
                             reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                         }
 
-                        while ((s = reader.readLine()) != null) {
-                            response = s;
+                        while ((tmpStr = reader.readLine()) != null) {
+                            response = tmpStr;
                         }
                     } catch (IOException e) {
                         System.err.println("Error: " + e.getMessage());
@@ -648,8 +652,8 @@ public class OpenWeatherMap {
                 } else { // if HttpURLConnection is not okay
                     try {
                         reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-                        while ((s = reader.readLine()) != null) {
-                            response = s;
+                        while ((tmpStr = reader.readLine()) != null) {
+                            response = tmpStr;
                         }
                     } catch (IOException e) {
                         System.err.println("Error: " + e.getMessage());

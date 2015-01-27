@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2014 Ashutosh Kumar Singh <me@aksingh.net>
+ * Copyright (c) 2013-2015 Ashutosh Kumar Singh <me@aksingh.net>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,7 @@ package net.aksingh.owmjapis;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -233,7 +234,7 @@ public class DailyForecast extends AbstractForecast {
          * Others: <code>null</code>
          * </p>
          */
-        public static class Temperature {
+        public static class Temperature implements Serializable {
             public final String JSON_TEMP_DAY = "day";
             public final String JSON_TEMP_MIN = "min";
             public final String JSON_TEMP_MAX = "max";

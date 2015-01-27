@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2014 Ashutosh Kumar Singh <me@aksingh.net>
+ * Copyright (c) 2013-2015 Ashutosh Kumar Singh <me@aksingh.net>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,8 @@ package net.aksingh.owmjapis;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * <p>
  * Provides default behaviours and implementations for:
@@ -40,7 +42,10 @@ public abstract class AbstractForecast extends AbstractResponse {
     /*
     JSON Keys
      */
-    final String JSON_FORECAST_LIST = "list";
+    static final String JSON_FORECAST_LIST = "list";
+    static final String JSON_MESSAGE = "message";
+    static final String JSON_CITY = "city";
+    static final String JSON_FORECAST_COUNT = "cnt";
 
     /*
     Instance variables
@@ -63,10 +68,6 @@ public abstract class AbstractForecast extends AbstractResponse {
 
     AbstractForecast(JSONObject jsonObj) {
         super(jsonObj);
-
-        final String JSON_MESSAGE = "message";
-        final String JSON_CITY = "city";
-        final String JSON_FORECAST_COUNT = "cnt";
 
         this.message = (jsonObj != null) ? jsonObj.optDouble(JSON_MESSAGE, Double.NaN) : Double.NaN;
 
@@ -124,12 +125,12 @@ public abstract class AbstractForecast extends AbstractResponse {
      *
      * @author Ashutosh Kumar Singh
      */
-    public static class City {
-        private final String JSON_CITY_ID = "id";
-        private final String JSON_CITY_NAME = "name";
-        private final String JSON_CITY_COUNTRY_CODE = "country";
-        private final String JSON_CITY_POPULATION = "population";
-        private final String JSON_CITY_COORD = "coord";
+    public static class City implements Serializable {
+        private static final String JSON_CITY_ID = "id";
+        private static final String JSON_CITY_NAME = "name";
+        private static final String JSON_CITY_COUNTRY_CODE = "country";
+        private static final String JSON_CITY_POPULATION = "population";
+        private static final String JSON_CITY_COORD = "coord";
 
         private final long cityID;
         private final String cityName;
