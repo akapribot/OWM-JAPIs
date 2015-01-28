@@ -53,6 +53,7 @@ public class CurrentWeather extends AbstractWeather {
     JSON Keys
      */
     private static final String JSON_RAIN = "rain";
+    private static final String JSON_SNOW = "snow";
     private static final String JSON_SYS = "sys";
     private static final String JSON_BASE = "base";
     private static final String JSON_CITY_ID = "id";
@@ -69,6 +70,7 @@ public class CurrentWeather extends AbstractWeather {
     private final Coord coord;
     private final Main main;
     private final Rain rain;
+    private final Snow snow;
     private final Sys sys;
     private final Wind wind;
 
@@ -93,6 +95,9 @@ public class CurrentWeather extends AbstractWeather {
 
         JSONObject rainObj = (jsonObj != null) ? jsonObj.optJSONObject(JSON_RAIN) : null;
         this.rain = (rainObj != null) ? new Rain(rainObj) : null;
+
+        JSONObject snowObj = (jsonObj != null) ? jsonObj.optJSONObject(JSON_SNOW) : null;
+        this.snow = (snowObj != null) ? new Snow(rainObj) : null;
 
         JSONObject sysObj = (jsonObj != null) ? jsonObj.optJSONObject(JSON_SYS) : null;
         this.sys = (sysObj != null) ? new Sys(sysObj) : null;
@@ -148,6 +153,13 @@ public class CurrentWeather extends AbstractWeather {
      */
     public boolean hasRainInstance() {
         return (rain != null);
+    }
+
+    /**
+     * @return <code>true</code> if Snow instance is available, otherwise <code>false</code>.
+     */
+    public boolean hasSnowInstance() {
+        return (snow != null);
     }
 
     /**
@@ -211,6 +223,13 @@ public class CurrentWeather extends AbstractWeather {
      */
     public Rain getRainInstance() {
         return this.rain;
+    }
+
+    /**
+     * @return Snow instance if available, otherwise <code>null</code>.
+     */
+    public Snow getSnowInstance() {
+        return this.snow;
     }
 
     /**
@@ -360,6 +379,49 @@ public class CurrentWeather extends AbstractWeather {
 
         public float getRain() {
             return this.rain1h;
+        }
+    }
+
+    /**
+     * <p>
+     * Parses snow data and provides methods to get/access the same information.
+     * This class provides <code>has</code> and <code>get</code> methods to access the information.
+     * </p>
+     * <p>
+     * <code>has</code> methods can be used to check if the data exists, i.e., if the data was available
+     * (successfully downloaded) and was parsed correctly.
+     * <code>get</code> methods can be used to access the data, if the data exists, otherwise <code>get</code>
+     * methods will give value as per following basis:
+     * Boolean: <code>false</code>
+     * Integral: Minimum value (MIN_VALUE)
+     * Floating point: Not a number (NaN)
+     * Others: <code>null</code>
+     * </p>
+     *
+     * @author Ashutosh Kumar Singh
+     * @version 2015/01/28
+     * @since 2.5.0.4
+     */
+    public static class Snow implements Serializable {
+
+        private static final String JSON_SNOW_3HOUR = "3h";
+
+        private final float snow3h;
+
+        Snow() {
+            this.snow3h = Float.NaN;
+        }
+
+        Snow(JSONObject jsonObj) {
+            this.snow3h = (float) jsonObj.optDouble(this.JSON_SNOW_3HOUR, Double.NaN);
+        }
+
+        public boolean hasSnow() {
+            return (this.snow3h != Float.NaN);
+        }
+
+        public float getSnow() {
+            return this.snow3h;
         }
     }
 
