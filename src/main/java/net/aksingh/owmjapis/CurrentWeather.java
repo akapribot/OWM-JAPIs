@@ -84,25 +84,25 @@ public class CurrentWeather extends AbstractWeather {
         this.cityId = (jsonObj != null) ? jsonObj.optLong(JSON_CITY_ID, Long.MIN_VALUE) : Long.MIN_VALUE;
         this.cityName = (jsonObj != null) ? jsonObj.optString(JSON_CITY_NAME, null) : null;
 
-        JSONObject cloudsObj = (jsonObj != null) ? jsonObj.optJSONObject(this.JSON_CLOUDS) : null;
+        JSONObject cloudsObj = (jsonObj != null) ? jsonObj.optJSONObject(JSON_CLOUDS) : null;
         this.clouds = (cloudsObj != null) ? new Clouds(cloudsObj) : null;
 
-        JSONObject coordObj = (jsonObj != null) ? jsonObj.optJSONObject(this.JSON_COORD) : null;
+        JSONObject coordObj = (jsonObj != null) ? jsonObj.optJSONObject(JSON_COORD) : null;
         this.coord = (coordObj != null) ? new Coord(coordObj) : null;
 
-        JSONObject mainObj = (jsonObj != null) ? jsonObj.optJSONObject(this.JSON_MAIN) : null;
+        JSONObject mainObj = (jsonObj != null) ? jsonObj.optJSONObject(JSON_MAIN) : null;
         this.main = (mainObj != null) ? new Main(mainObj) : null;
 
         JSONObject rainObj = (jsonObj != null) ? jsonObj.optJSONObject(JSON_RAIN) : null;
         this.rain = (rainObj != null) ? new Rain(rainObj) : null;
 
         JSONObject snowObj = (jsonObj != null) ? jsonObj.optJSONObject(JSON_SNOW) : null;
-        this.snow = (snowObj != null) ? new Snow(rainObj) : null;
+        this.snow = (snowObj != null) ? new Snow(snowObj) : null;
 
         JSONObject sysObj = (jsonObj != null) ? jsonObj.optJSONObject(JSON_SYS) : null;
         this.sys = (sysObj != null) ? new Sys(sysObj) : null;
 
-        JSONObject windObj = (jsonObj != null) ? jsonObj.optJSONObject(this.JSON_WIND) : null;
+        JSONObject windObj = (jsonObj != null) ? jsonObj.optJSONObject(JSON_WIND) : null;
         this.wind = (windObj != null) ? new Wind(windObj) : null;
     }
 
@@ -110,70 +110,70 @@ public class CurrentWeather extends AbstractWeather {
      * @return <code>true</code> if base station is available, otherwise <code>false</code>.
      */
     public boolean hasBaseStation() {
-        return (this.base != null && (!this.base.equals("")));
+        return this.base != null && (! "".equals(this.base));
     }
 
     /**
      * @return <code>true</code> if city code is available, otherwise <code>false</code>.
      */
     public boolean hasCityCode() {
-        return (this.cityId != Long.MIN_VALUE);
+        return this.cityId != Long.MIN_VALUE;
     }
 
     /**
      * @return <code>true</code> if city name is available, otherwise <code>false</code>.
      */
     public boolean hasCityName() {
-        return (this.cityName != null && (!this.cityName.equals("")));
+        return this.cityName != null && (! "".equals(this.cityName));
     }
 
     /**
      * @return <code>true</code> if Clouds instance is available, otherwise <code>false</code>.
      */
     public boolean hasCloudsInstance() {
-        return (clouds != null);
+        return clouds != null;
     }
 
     /**
      * @return <code>true</code> if Coord instance is available, otherwise <code>false</code>.
      */
     public boolean hasCoordInstance() {
-        return (coord != null);
+        return coord != null;
     }
 
     /**
      * @return <code>true</code> if Main instance is available, otherwise <code>false</code>.
      */
     public boolean hasMainInstance() {
-        return (main != null);
+        return main != null;
     }
 
     /**
      * @return <code>true</code> if Rain instance is available, otherwise <code>false</code>.
      */
     public boolean hasRainInstance() {
-        return (rain != null);
+        return rain != null;
     }
 
     /**
      * @return <code>true</code> if Snow instance is available, otherwise <code>false</code>.
      */
     public boolean hasSnowInstance() {
-        return (snow != null);
+        return snow != null;
     }
 
     /**
      * @return <code>true</code> if Sys instance is available, otherwise <code>false</code>.
      */
     public boolean hasSysInstance() {
-        return (sys != null);
+        return sys != null;
     }
 
     /**
      * @return <code>true</code> if Wind instance is available, otherwise <code>false</code>.
      */
     public boolean hasWindInstance() {
-        return (wind != null);
+        return wind != null;
     }
 
     /**
@@ -362,23 +362,35 @@ public class CurrentWeather extends AbstractWeather {
     public static class Rain implements Serializable {
 
         private static final String JSON_RAIN_1HOUR = "1h";
+        private static final String JSON_RAIN_3HOUR = "3h";
 
         private final float rain1h;
+        private final float rain3h;
 
         Rain() {
             this.rain1h = Float.NaN;
+            this.rain3h = Float.NaN;
         }
 
         Rain(JSONObject jsonObj) {
-            this.rain1h = (float) jsonObj.optDouble(this.JSON_RAIN_1HOUR, Double.NaN);
+            this.rain1h = (float) jsonObj.optDouble(JSON_RAIN_1HOUR, Double.NaN);
+            this.rain3h = (float) jsonObj.optDouble(JSON_RAIN_3HOUR, Double.NaN);
         }
 
-        public boolean hasRain() {
-            return (this.rain1h != Float.NaN);
+        public boolean hasRain1h() {
+            return !Float.isNaN(this.rain1h);
         }
 
-        public float getRain() {
+        public boolean hasRain3h() {
+            return !Float.isNaN(this.rain3h);
+        }
+
+        public float getRain1h() {
             return this.rain1h;
+        }
+
+        public float getRain3h() {
+            return this.rain3h;
         }
     }
 
@@ -404,23 +416,35 @@ public class CurrentWeather extends AbstractWeather {
      */
     public static class Snow implements Serializable {
 
+        private static final String JSON_SNOW_1HOUR = "1h";
         private static final String JSON_SNOW_3HOUR = "3h";
 
+        private final float snow1h;
         private final float snow3h;
 
         Snow() {
+            this.snow1h = Float.NaN;
             this.snow3h = Float.NaN;
         }
 
         Snow(JSONObject jsonObj) {
-            this.snow3h = (float) jsonObj.optDouble(this.JSON_SNOW_3HOUR, Double.NaN);
+            this.snow1h = (float) jsonObj.optDouble(JSON_SNOW_1HOUR, Double.NaN);
+            this.snow3h = (float) jsonObj.optDouble(JSON_SNOW_3HOUR, Double.NaN);
         }
 
-        public boolean hasSnow() {
-            return (this.snow3h != Float.NaN);
+        public boolean hasSnow1h() {
+            return !Float.isNaN(this.snow1h);
         }
 
-        public float getSnow() {
+        public boolean hasSnow3h() {
+            return !Float.isNaN(this.snow3h);
+        }
+
+        public float getSnow1h() {
+            return this.snow1h;
+        }
+
+        public float getSnow3h() {
             return this.snow3h;
         }
     }
@@ -471,34 +495,20 @@ public class CurrentWeather extends AbstractWeather {
         }
 
         Sys(JSONObject jsonObj) {
-            this.type = jsonObj.optInt(this.JSON_SYS_TYPE, Integer.MIN_VALUE);
-            this.id = jsonObj.optInt(this.JSON_SYS_ID, Integer.MIN_VALUE);
-            this.message = jsonObj.optDouble(this.JSON_SYS_MESSAGE, Double.NaN);
-            this.countryCode = jsonObj.optString(this.JSON_SYS_COUNTRY_CODE, null);
+            this.type = jsonObj.optInt(JSON_SYS_TYPE, Integer.MIN_VALUE);
+            this.id = jsonObj.optInt(JSON_SYS_ID, Integer.MIN_VALUE);
+            this.message = jsonObj.optDouble(JSON_SYS_MESSAGE, Double.NaN);
+            this.countryCode = jsonObj.optString(JSON_SYS_COUNTRY_CODE, null);
 
-            long sr_secs = jsonObj.optLong(this.JSON_SYS_SUNRISE, Long.MIN_VALUE);
+            long sr_secs = jsonObj.optLong(JSON_SYS_SUNRISE, Long.MIN_VALUE);
             if (sr_secs != Long.MIN_VALUE) {
-                /*
-                 Bugfix: Incorrect date and time
-                 Issue: #3 given at http://code.aksingh.net/owm-japis/issue/3/problem-with-datetime
-                 Incorrect: this.sunrise = new Date(sr_secs);
-                 Correct: this.sunrise = new Date(sr_secs * 1000);
-                 Reason: Date requires milliseconds but previously, seconds were provided.
-                 */
                 this.sunrise = new Date(sr_secs * 1000);
             } else {
                 this.sunrise = null;
             }
 
-            long ss_secs = jsonObj.optLong(this.JSON_SYS_SUNSET, Long.MIN_VALUE);
+            long ss_secs = jsonObj.optLong(JSON_SYS_SUNSET, Long.MIN_VALUE);
             if (ss_secs != Long.MIN_VALUE) {
-                /*
-                 Bugfix: Incorrect date and time
-                 Issue: #3 given at http://code.aksingh.net/owm-japis/issue/3/problem-with-datetime
-                 Incorrect: this.sunrise = new Date(ss_secs);
-                 Correct: this.sunrise = new Date(ss_secs * 1000);
-                 Reason: Date requires milliseconds but previously, seconds were provided.
-                 */
                 this.sunset = new Date(ss_secs * 1000);
             } else {
                 this.sunset = null;
@@ -506,27 +516,27 @@ public class CurrentWeather extends AbstractWeather {
         }
 
         public boolean hasType() {
-            return (this.type != Integer.MIN_VALUE);
+            return this.type != Integer.MIN_VALUE;
         }
 
         public boolean hasId() {
-            return (this.id != Integer.MIN_VALUE);
+            return this.id != Integer.MIN_VALUE;
         }
 
         public boolean hasMessage() {
-            return (this.message != Double.NaN);
+            return !Double.isNaN(this.message);
         }
 
         public boolean hasCountryCode() {
-            return (this.countryCode != null);
+            return this.countryCode != null && (! "".equals(this.countryCode));
         }
 
         public boolean hasSunriseTime() {
-            return (this.sunrise != null);
+            return this.sunrise != null;
         }
 
         public boolean hasSunsetTime() {
-            return (this.sunset != null);
+            return this.sunset != null;
         }
 
         public int getType() {
@@ -589,11 +599,11 @@ public class CurrentWeather extends AbstractWeather {
         Wind(JSONObject jsonObj) {
             super(jsonObj);
 
-            this.gust = (float) jsonObj.optDouble(this.JSON_WIND_GUST, Double.NaN);
+            this.gust = (float) jsonObj.optDouble(JSON_WIND_GUST, Double.NaN);
         }
 
         public boolean hasWindGust() {
-            return (this.gust != Float.NaN);
+            return !Float.isNaN(this.gust);
         }
 
         public float getWindGust() {
