@@ -2,9 +2,11 @@
 
 ####Java Library for OpenWeatherMap.org Weather APIs
 
-Create weather-aware applications for **Java and Android platforms** in minimum time using OWM JAPIs, an easy-to-use, detailed and documented weather APIs wrapper library for retrieving weather data from OpenWeatherMap.org. You can easily **retrieve and use weather data** in your applications using this library.
+OWM JAPIs lets you develop weather-aware applications for **Java and Android platforms** in minimum time using OWM JAPIs, an easy-to-use, detailed and documented weather APIs' wrapper library for retrieving weather data from OpenWeatherMap.org. You can easily **retrieve and use weather data** in your applications using this library.
 
-OWM JAPIs lets you **get weather data in only 3-5 lines of code** (excluding any other/skeleton code, of course). You can develop applications and services for multiple platforms using Java and this library, such as Windows, Mac OS X, Linux, and Android.
+OWM JAPIs allows you to **fetch weather data in only 3-5 lines of code** (excluding any other/skeleton code, of course). You can develop applications and services for multiple platforms using this library, such as Windows, Mac OS X, Linux, and Android.
+
+Homepage: http://code.aksingh.net/owm-japis
 
 
 
@@ -17,10 +19,10 @@ OWM JAPIs lets you **focus just on your application's logic** and **weather retr
 
 
 
-##Downloads
+##How to use OWM JAPIs?
 Download the library's source and binaries from [OWM JAPIs Downloads][1].
 
-Use Maven, Gradle or an build tool? [OWM JAPIs is available in Maven Central repository][10].
+Do use Maven, Gradle or an build tool? [OWM JAPIs is available in Maven Central repository][10].
 
 
 
@@ -28,7 +30,16 @@ Use Maven, Gradle or an build tool? [OWM JAPIs is available in Maven Central rep
 ###2.5 (Compatible with OpenWeatherMap.org's API v2.5)
 
 
-####2.5.0.4 (latest)
+####2.5.0.5 (latest)
+
+**Bug-fix version:**
+
+1. Fixed 1h and 3h parameter in Rain and Snow.
+2. Added Snow in CurrentWeather.
+3. Added proxy support to fetch data via a proxy server.
+
+
+####2.5.0.4
 
 **Bug-fix version:**
 
@@ -202,9 +213,9 @@ Download the library's source code from [OWM JAPIs Source][2].
 
 
 ##Bugs / Requests
-Got a problem, error or bug in the library? Or want a new feature that's not present in OWM JAPIs?
+Got a problem, error or bug in the library? Or want a new feature that's not already available in OWM JAPIs?
 
-Kindly post bugs or feature requests at [OWM JAPIs Bugs/Requests][3] and I will try to solve/add it in the next release.
+Kindly post bugs or feature requests at [OWM JAPIs Issues][3] and I will try to solve/add it in the next release.
 
 
 
@@ -234,9 +245,9 @@ Copyright (c) 2013-2014 Ashutosh Kumar Singh `<me@aksingh.net>`
 Released under the terms of the [MIT license][7]. It's open source and developer-friendly.
 
 
-  [1]: http://go.aksingh.net/owm-japis-downloads
-  [2]: http://go.aksingh.net/owm-japis-src
-  [3]: http://go.aksingh.net/owm-japis-bugs
+  [1]: http://code.aksingh.net/owm-japis/downloads
+  [2]: http://code.aksingh.net/owm-japis/src
+  [3]: http://code.aksingh.net/owm-japis/issues
   [4]: http://www.aksingh.net/
   [5]: http://openweathermap.org/
   [6]: http://www.json.org/java/index.html
