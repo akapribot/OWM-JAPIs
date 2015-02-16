@@ -37,6 +37,11 @@ import java.io.Serializable;
  */
 abstract class AbstractResponse implements Serializable {
     /*
+    JSON Keys
+     */
+    private static final String JSON_RESPONSE_CODE = "cod";
+
+    /*
     Instance variables
      */
     private final int responseCode;
@@ -51,8 +56,6 @@ abstract class AbstractResponse implements Serializable {
     }
 
     AbstractResponse(JSONObject jsonObj) {
-        final String JSON_RESPONSE_CODE = "cod";
-
         this.rawResponse = (jsonObj != null) ? jsonObj.toString() : null;
         this.responseCode = (jsonObj != null) ? jsonObj.optInt(JSON_RESPONSE_CODE, Integer.MIN_VALUE) : Integer.MIN_VALUE;
     }
@@ -61,21 +64,21 @@ abstract class AbstractResponse implements Serializable {
      * @return <code>true</code> if response is valid (downloaded and parsed correctly), otherwise <code>false</code>.
      */
     public boolean isValid() {
-        return (this.responseCode == 200);
+        return this.responseCode == 200;
     }
 
     /**
      * @return <code>true</code> if response code is available, otherwise <code>false</code>.
      */
     public boolean hasResponseCode() {
-        return (this.responseCode != Integer.MIN_VALUE);
+        return this.responseCode != Integer.MIN_VALUE;
     }
 
     /**
      * @return <code>true</code> if raw response is available, otherwise <code>false</code>.
      */
     public boolean hasRawResponse() {
-        return (this.rawResponse != null);
+        return this.rawResponse != null;
     }
 
     /**

@@ -149,36 +149,36 @@ public abstract class AbstractForecast extends AbstractResponse {
         }
 
         City(JSONObject jsonObj) {
-            this.cityID = (jsonObj != null) ? jsonObj.optLong(this.JSON_CITY_ID, Long.MIN_VALUE) : Long.MIN_VALUE;
-            this.cityName = (jsonObj != null) ? jsonObj.optString(this.JSON_CITY_NAME, null) : null;
-            this.countryCode = (jsonObj != null) ? jsonObj.optString(this.JSON_CITY_COUNTRY_CODE, null) : null;
-            this.population = (jsonObj != null) ? jsonObj.optLong(this.JSON_CITY_POPULATION, Long.MIN_VALUE) : Long.MIN_VALUE;
+            this.cityID = (jsonObj != null) ? jsonObj.optLong(JSON_CITY_ID, Long.MIN_VALUE) : Long.MIN_VALUE;
+            this.cityName = (jsonObj != null) ? jsonObj.optString(JSON_CITY_NAME, null) : null;
+            this.countryCode = (jsonObj != null) ? jsonObj.optString(JSON_CITY_COUNTRY_CODE, null) : null;
+            this.population = (jsonObj != null) ? jsonObj.optLong(JSON_CITY_POPULATION, Long.MIN_VALUE) : Long.MIN_VALUE;
 
-            JSONObject jsonObjCoord = (jsonObj != null) ? jsonObj.optJSONObject(this.JSON_CITY_COORD) : null;
+            JSONObject jsonObjCoord = (jsonObj != null) ? jsonObj.optJSONObject(JSON_CITY_COORD) : null;
             this.coord = (jsonObjCoord != null) ? new Coord(jsonObjCoord) : null;
         }
 
         public boolean hasCityCode() {
-            return (this.cityID != Long.MIN_VALUE);
+            return this.cityID != Long.MIN_VALUE;
         }
 
         public boolean hasCityName() {
-            return (this.cityName != null);
+            return this.cityName != null;
         }
 
         public boolean hasCountryCode() {
-            return (this.countryCode != null);
+            return this.countryCode != null;
         }
 
         public boolean hasCityPopulation() {
-            return (this.population != Long.MIN_VALUE);
+            return this.population != Long.MIN_VALUE;
         }
 
         /**
          * @return <code>true</code> if Coord instance is available, otherwise <code>false</code>.
          */
         public boolean hasCoordInstance() {
-            return (coord != null);
+            return coord != null;
         }
 
         public long getCityCode() {

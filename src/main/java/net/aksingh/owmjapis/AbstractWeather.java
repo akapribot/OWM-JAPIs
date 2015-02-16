@@ -77,13 +77,6 @@ public abstract class AbstractWeather extends AbstractResponse {
 
         long sec = (jsonObj != null) ? jsonObj.optLong(JSON_DATE_TIME, Long.MIN_VALUE) : Long.MIN_VALUE;
         if (sec != Long.MIN_VALUE) { // converting seconds to Date object
-            /*
-             Bugfix: It always return "Sat Jan 17 04:10:42 CET 1970"
-             Issue: #3 at http://code.aksingh.net/owm-japis/issue/3/problem-with-datetime
-             Incorrect: this.dateTime = new Date(sec);
-             Correct: this.dateTime = new Date(sec * 1000);
-             Reason: Date requires milliseconds but previously, seconds were provided.
-             */
             this.dateTime = new Date(sec * 1000);
         } else {
             this.dateTime = null;
@@ -91,7 +84,7 @@ public abstract class AbstractWeather extends AbstractResponse {
 
         JSONArray weatherArray = (jsonObj != null) ? jsonObj.optJSONArray(JSON_WEATHER) : new JSONArray();
         this.weatherList = (weatherArray != null) ? new ArrayList<Weather>(weatherArray.length()) : Collections.EMPTY_LIST;
-        if (this.weatherList != Collections.EMPTY_LIST) {
+        if (weatherArray != null && this.weatherList != Collections.EMPTY_LIST) {
             for (int i = 0; i < weatherArray.length(); i++) {
                 JSONObject weatherObj = weatherArray.optJSONObject(i);
                 if (weatherObj != null) {
@@ -106,14 +99,14 @@ public abstract class AbstractWeather extends AbstractResponse {
      * @return <code>true</code> if date/time is available, otherwise <code>false</code>.
      */
     public boolean hasDateTime() {
-        return (this.dateTime != null);
+        return this.dateTime != null;
     }
 
     /**
      * @return <code>true</code> if Weather instance(s) is available, otherwise <code>false</code>.
      */
     public boolean hasWeatherInstance() {
-        return (weatherCount != 0);
+        return weatherCount != 0;
     }
 
     /**
@@ -157,7 +150,7 @@ public abstract class AbstractWeather extends AbstractResponse {
         }
 
         Clouds(JSONObject jsonObj) {
-            this.percentOfClouds = (float) jsonObj.optDouble(this.JSON_CLOUDS_ALL, Double.NaN);
+            this.percentOfClouds = (float) jsonObj.optDouble(JSON_CLOUDS_ALL, Double.NaN);
         }
 
         /**
@@ -166,7 +159,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>
          */
         public boolean hasPercentageOfClouds() {
-            return (this.percentOfClouds != Float.NaN);
+            return !Float.isNaN(this.percentOfClouds);
         }
 
         /**
@@ -199,8 +192,8 @@ public abstract class AbstractWeather extends AbstractResponse {
         }
 
         Coord(JSONObject jsonObj) {
-            this.lat = (float) jsonObj.optDouble(this.JSON_COORD_LATITUDE, Double.NaN);
-            this.lon = (float) jsonObj.optDouble(this.JSON_COORD_LONGITUDE, Double.NaN);
+            this.lat = (float) jsonObj.optDouble(JSON_COORD_LATITUDE, Double.NaN);
+            this.lon = (float) jsonObj.optDouble(JSON_COORD_LONGITUDE, Double.NaN);
         }
 
         /**
@@ -209,7 +202,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>
          */
         public boolean hasLatitude() {
-            return (this.lat != Float.NaN);
+            return !Float.isNaN(this.lat);
         }
 
         /**
@@ -218,7 +211,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>
          */
         public boolean hasLongitude() {
-            return (this.lon != Float.NaN);
+            return !Float.isNaN(this.lon);
         }
 
         /**
@@ -268,11 +261,11 @@ public abstract class AbstractWeather extends AbstractResponse {
         }
 
         Main(JSONObject jsonObj) {
-            this.temp = (float) jsonObj.optDouble(this.JSON_MAIN_TEMP, Double.NaN);
-            this.minTemp = (float) jsonObj.optDouble(this.JSON_MAIN_TEMP_MIN, Double.NaN);
-            this.maxTemp = (float) jsonObj.optDouble(this.JSON_MAIN_TEMP_MAX, Double.NaN);
-            this.pressure = (float) jsonObj.optDouble(this.JSON_MAIN_PRESSURE, Double.NaN);
-            this.humidity = (float) jsonObj.optDouble(this.JSON_MAIN_HUMIDITY, Double.NaN);
+            this.temp = (float) jsonObj.optDouble(JSON_MAIN_TEMP, Double.NaN);
+            this.minTemp = (float) jsonObj.optDouble(JSON_MAIN_TEMP_MIN, Double.NaN);
+            this.maxTemp = (float) jsonObj.optDouble(JSON_MAIN_TEMP_MAX, Double.NaN);
+            this.pressure = (float) jsonObj.optDouble(JSON_MAIN_PRESSURE, Double.NaN);
+            this.humidity = (float) jsonObj.optDouble(JSON_MAIN_HUMIDITY, Double.NaN);
         }
 
         /**
@@ -281,7 +274,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>
          */
         public boolean hasTemperature() {
-            return (this.temp != Float.NaN);
+            return !Float.isNaN(this.temp);
         }
 
         /**
@@ -290,7 +283,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>
          */
         public boolean hasMinTemperature() {
-            return (this.minTemp != Float.NaN);
+            return !Float.isNaN(this.minTemp);
         }
 
         /**
@@ -299,7 +292,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>
          */
         public boolean hasMaxTemperature() {
-            return (this.maxTemp != Float.NaN);
+            return !Float.isNaN(this.maxTemp);
         }
 
         /**
@@ -308,7 +301,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>
          */
         public boolean hasPressure() {
-            return (this.pressure != Float.NaN);
+            return !Float.isNaN(this.pressure);
         }
 
         /**
@@ -317,7 +310,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>
          */
         public boolean hasHumidity() {
-            return (this.humidity != Float.NaN);
+            return !Float.isNaN(this.humidity);
         }
 
         /**
@@ -395,10 +388,10 @@ public abstract class AbstractWeather extends AbstractResponse {
         }
 
         Weather(JSONObject jsonObj) {
-            this.id = jsonObj.optInt(this.JSON_WEATHER_ID, Integer.MIN_VALUE);
-            this.name = jsonObj.optString(this.JSON_WEATHER_MAIN, null);
-            this.description = jsonObj.optString(this.JSON_WEATHER_DESCRIPTION, null);
-            this.icon = jsonObj.optString(this.JSON_WEATHER_ICON, null);
+            this.id = jsonObj.optInt(JSON_WEATHER_ID, Integer.MIN_VALUE);
+            this.name = jsonObj.optString(JSON_WEATHER_MAIN, null);
+            this.description = jsonObj.optString(JSON_WEATHER_DESCRIPTION, null);
+            this.icon = jsonObj.optString(JSON_WEATHER_ICON, null);
         }
 
         /**
@@ -407,7 +400,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>.
          */
         public boolean hasWeatherCode() {
-            return (this.id != Integer.MIN_VALUE);
+            return this.id != Integer.MIN_VALUE;
         }
 
         /**
@@ -416,7 +409,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>.
          */
         public boolean hasWeatherName() {
-            return (this.name != null && (!this.name.equals("")));
+            return this.name != null && (! "".equals(this.name));
         }
 
         /**
@@ -425,7 +418,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>.
          */
         public boolean hasWeatherDescription() {
-            return (this.description != null && (!this.description.equals("")));
+            return this.description != null && (! "".equals(this.description));
         }
 
         /**
@@ -434,7 +427,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>.
          */
         public boolean hasWeatherIconName() {
-            return (this.icon != null && (!this.icon.equals("")));
+            return this.icon != null && (! "".equals(this.icon));
         }
 
         /**
@@ -488,8 +481,8 @@ public abstract class AbstractWeather extends AbstractResponse {
         }
 
         Wind(JSONObject jsonObj) {
-            this.speed = (float) jsonObj.optDouble(this.JSON_WIND_SPEED, Double.NaN);
-            this.degree = (float) jsonObj.optDouble(this.JSON_WIND_DEGREE, Double.NaN);
+            this.speed = (float) jsonObj.optDouble(JSON_WIND_SPEED, Double.NaN);
+            this.degree = (float) jsonObj.optDouble(JSON_WIND_DEGREE, Double.NaN);
         }
 
         /**
@@ -498,7 +491,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>.
          */
         public boolean hasWindSpeed() {
-            return (this.speed != Float.NaN);
+            return !Float.isNaN(this.speed);
         }
 
         /**
@@ -507,7 +500,7 @@ public abstract class AbstractWeather extends AbstractResponse {
          * @return <code>true</code> if data available, otherwise <code>false</code>.
          */
         public boolean hasWindDegree() {
-            return (this.hasWindSpeed() && (this.degree != Float.NaN));
+            return this.hasWindSpeed() && (! Float.isNaN(this.degree));
         }
 
         /**

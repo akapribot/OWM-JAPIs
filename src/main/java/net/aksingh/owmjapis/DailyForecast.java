@@ -63,9 +63,9 @@ public class DailyForecast extends AbstractForecast {
     DailyForecast(JSONObject jsonObj) {
         super(jsonObj);
 
-        JSONArray dataArray = (jsonObj != null) ? jsonObj.optJSONArray(this.JSON_FORECAST_LIST) : new JSONArray();
+        JSONArray dataArray = (jsonObj != null) ? jsonObj.optJSONArray(JSON_FORECAST_LIST) : new JSONArray();
         this.forecastList = (dataArray != null) ? new ArrayList<Forecast>(dataArray.length()) : Collections.EMPTY_LIST;
-        if (this.forecastList != Collections.EMPTY_LIST) {
+        if (dataArray != null && this.forecastList != Collections.EMPTY_LIST) {
             for (int i = 0; i < dataArray.length(); i++) {
                 JSONObject forecastObj = dataArray.optJSONObject(i);
                 if (forecastObj != null) {
@@ -103,15 +103,15 @@ public class DailyForecast extends AbstractForecast {
         /*
         JSON Keys
          */
-        public final String JSON_TEMP = "temp";
+        public static final String JSON_TEMP = "temp";
 
-        private final String JSON_FORECAST_PRESSURE = "pressure";
-        private final String JSON_FORECAST_HUMIDITY = "humidity";
-        private final String JSON_FORECAST_WIND_SPEED = "speed";
-        private final String JSON_FORECAST_WIND_DEGREE = "deg";
-        private final String JSON_FORECAST_CLOUDS = "clouds";
-        private final String JSON_FORECAST_RAIN = "rain";
-        private final String JSON_FORECAST_SNOW = "snow";
+        private static final String JSON_FORECAST_PRESSURE = "pressure";
+        private static final String JSON_FORECAST_HUMIDITY = "humidity";
+        private static final String JSON_FORECAST_WIND_SPEED = "speed";
+        private static final String JSON_FORECAST_WIND_DEGREE = "deg";
+        private static final String JSON_FORECAST_CLOUDS = "clouds";
+        private static final String JSON_FORECAST_RAIN = "rain";
+        private static final String JSON_FORECAST_SNOW = "snow";
 
         /*
         Instance Variables
@@ -146,44 +146,44 @@ public class DailyForecast extends AbstractForecast {
         Forecast(JSONObject jsonObj) {
             super(jsonObj);
 
-            JSONObject jsonObjTemp = (jsonObj != null) ? jsonObj.optJSONObject(this.JSON_TEMP) : null;
+            JSONObject jsonObjTemp = (jsonObj != null) ? jsonObj.optJSONObject(JSON_TEMP) : null;
             this.temp = (jsonObjTemp != null) ? new Temperature(jsonObjTemp) : new Temperature();
 
-            this.humidity = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_FORECAST_HUMIDITY, Double.NaN) : Float.NaN;
-            this.pressure = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_FORECAST_PRESSURE, Double.NaN) : Float.NaN;
-            this.windSpeed = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_FORECAST_WIND_SPEED, Double.NaN) : Float.NaN;
-            this.windDegree = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_FORECAST_WIND_DEGREE, Double.NaN) : Float.NaN;
-            this.cloudsPercent = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_FORECAST_CLOUDS, Double.NaN) : Float.NaN;
-            this.rain = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_FORECAST_RAIN, Double.NaN) : Float.NaN;
-            this.snow = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_FORECAST_SNOW, Double.NaN) : Float.NaN;
+            this.humidity = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_FORECAST_HUMIDITY, Double.NaN) : Float.NaN;
+            this.pressure = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_FORECAST_PRESSURE, Double.NaN) : Float.NaN;
+            this.windSpeed = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_FORECAST_WIND_SPEED, Double.NaN) : Float.NaN;
+            this.windDegree = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_FORECAST_WIND_DEGREE, Double.NaN) : Float.NaN;
+            this.cloudsPercent = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_FORECAST_CLOUDS, Double.NaN) : Float.NaN;
+            this.rain = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_FORECAST_RAIN, Double.NaN) : Float.NaN;
+            this.snow = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_FORECAST_SNOW, Double.NaN) : Float.NaN;
         }
 
         public boolean hasHumidity() {
-            return (this.humidity != Float.NaN);
+            return !Float.isNaN(this.humidity);
         }
 
         public boolean hasPressure() {
-            return (this.pressure != Float.NaN);
+            return !Float.isNaN(this.pressure);
         }
 
         public boolean hasWindSpeed() {
-            return (this.windSpeed != Float.NaN);
+            return !Float.isNaN(this.windSpeed);
         }
 
         public boolean hasWindDegree() {
-            return (this.windDegree != Float.NaN);
+            return !Float.isNaN(this.windDegree);
         }
 
         public boolean hasPercentageOfClouds() {
-            return (this.cloudsPercent != Float.NaN);
+            return !Float.isNaN(this.cloudsPercent);
         }
 
         public boolean hasRain() {
-            return (this.rain != Float.NaN);
+            return !Float.isNaN(this.rain);
         }
 
         public boolean hasSnow() {
-            return (this.snow != Float.NaN);
+            return !Float.isNaN(this.snow);
         }
 
         public float getHumidity() {
@@ -235,12 +235,12 @@ public class DailyForecast extends AbstractForecast {
          * </p>
          */
         public static class Temperature implements Serializable {
-            public final String JSON_TEMP_DAY = "day";
-            public final String JSON_TEMP_MIN = "min";
-            public final String JSON_TEMP_MAX = "max";
-            public final String JSON_TEMP_NIGHT = "night";
-            public final String JSON_TEMP_EVENING = "eve";
-            public final String JSON_TEMP_MORNING = "morn";
+            private static final String JSON_TEMP_DAY = "day";
+            private static final String JSON_TEMP_MIN = "min";
+            private static final String JSON_TEMP_MAX = "max";
+            private static final String JSON_TEMP_NIGHT = "night";
+            private static final String JSON_TEMP_EVENING = "eve";
+            private static final String JSON_TEMP_MORNING = "morn";
 
             private final float dayTemp;
             private final float minTemp;
@@ -259,36 +259,36 @@ public class DailyForecast extends AbstractForecast {
             }
 
             Temperature(JSONObject jsonObj) {
-                this.dayTemp = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_TEMP_DAY, Double.NaN) : Float.NaN;
-                this.minTemp = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_TEMP_MIN, Double.NaN) : Float.NaN;
-                this.maxTemp = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_TEMP_MAX, Double.NaN) : Float.NaN;
-                this.nightTemp = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_TEMP_NIGHT, Double.NaN) : Float.NaN;
-                this.eveTemp = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_TEMP_EVENING, Double.NaN) : Float.NaN;
-                this.mornTemp = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_TEMP_MORNING, Double.NaN) : Float.NaN;
+                this.dayTemp = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_TEMP_DAY, Double.NaN) : Float.NaN;
+                this.minTemp = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_TEMP_MIN, Double.NaN) : Float.NaN;
+                this.maxTemp = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_TEMP_MAX, Double.NaN) : Float.NaN;
+                this.nightTemp = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_TEMP_NIGHT, Double.NaN) : Float.NaN;
+                this.eveTemp = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_TEMP_EVENING, Double.NaN) : Float.NaN;
+                this.mornTemp = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_TEMP_MORNING, Double.NaN) : Float.NaN;
             }
 
             public boolean hasDayTemperature() {
-                return (this.dayTemp != Float.NaN);
+                return !Float.isNaN(this.dayTemp);
             }
 
             public boolean hasMinimumTemperature() {
-                return (this.minTemp != Float.NaN);
+                return !Float.isNaN(this.minTemp);
             }
 
             public boolean hasMaximumTemperature() {
-                return (this.maxTemp != Float.NaN);
+                return !Float.isNaN(this.maxTemp);
             }
 
             public boolean hasNightTemperature() {
-                return (this.nightTemp != Float.NaN);
+                return !Float.isNaN(this.nightTemp);
             }
 
             public boolean hasEveningTemperature() {
-                return (this.eveTemp != Float.NaN);
+                return !Float.isNaN(this.eveTemp);
             }
 
             public boolean hasMorningTemperature() {
-                return (this.mornTemp != Float.NaN);
+                return !Float.isNaN(this.mornTemp);
             }
 
             public float getDayTemperature() {

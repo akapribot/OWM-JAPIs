@@ -65,7 +65,7 @@ public class HourlyForecast extends AbstractForecast {
 
         JSONArray forecastArr = (jsonObj != null) ? jsonObj.optJSONArray(this.JSON_FORECAST_LIST) : new JSONArray();
         this.forecastList = (forecastArr != null) ? new ArrayList<Forecast>(forecastArr.length()) : Collections.EMPTY_LIST;
-        if (this.forecastList != Collections.EMPTY_LIST) {
+        if (forecastArr != null && this.forecastList != Collections.EMPTY_LIST) {
             for (int i = 0; i < forecastArr.length(); i++) {
                 JSONObject forecastObj = forecastArr.optJSONObject(i);
                 if (forecastObj != null) {
@@ -103,8 +103,8 @@ public class HourlyForecast extends AbstractForecast {
         /*
         JSON Keys
          */
-        private final String JSON_SYS = "sys";
-        private final String JSON_DT_TEXT = "dt_txt";
+        private static final String JSON_SYS = "sys";
+        private static final String JSON_DT_TEXT = "dt_txt";
 
         /*
         Instance Variables
@@ -122,51 +122,51 @@ public class HourlyForecast extends AbstractForecast {
         Forecast(JSONObject jsonObj) {
             super(jsonObj);
 
-            this.dateTimeText = (jsonObj != null) ? jsonObj.optString(this.JSON_DT_TEXT, null) : null;
+            this.dateTimeText = (jsonObj != null) ? jsonObj.optString(JSON_DT_TEXT, null) : null;
 
-            JSONObject jsonObjClouds = (jsonObj != null) ? jsonObj.optJSONObject(this.JSON_CLOUDS) : null;
+            JSONObject jsonObjClouds = (jsonObj != null) ? jsonObj.optJSONObject(JSON_CLOUDS) : null;
             this.clouds = (jsonObjClouds != null) ? new Clouds(jsonObjClouds) : null;
 
-            JSONObject jsonObjMain = (jsonObj != null) ? jsonObj.optJSONObject(this.JSON_MAIN) : null;
+            JSONObject jsonObjMain = (jsonObj != null) ? jsonObj.optJSONObject(JSON_MAIN) : null;
             this.main = (jsonObjMain != null) ? new Main(jsonObjMain) : null;
 
-            JSONObject jsonObjSys = (jsonObj != null) ? jsonObj.optJSONObject(this.JSON_SYS) : null;
+            JSONObject jsonObjSys = (jsonObj != null) ? jsonObj.optJSONObject(JSON_SYS) : null;
             this.sys = (jsonObjSys != null) ? new Sys(jsonObjSys) : null;
 
-            JSONObject jsonObjWind = (jsonObj != null) ? jsonObj.optJSONObject(this.JSON_WIND) : null;
+            JSONObject jsonObjWind = (jsonObj != null) ? jsonObj.optJSONObject(JSON_WIND) : null;
             this.wind = (jsonObjWind != null) ? new Wind(jsonObjWind) : null;
         }
 
         public boolean hasDateTimeText() {
-            return (this.dateTimeText != null);
+            return this.dateTimeText != null;
         }
 
         /**
          * @return <code>true</code> if Clouds instance is available, otherwise <code>false</code>.
          */
         public boolean hasCloudsInstance() {
-            return (clouds != null);
+            return clouds != null;
         }
 
         /**
          * @return <code>true</code> if Main instance is available, otherwise <code>false</code>.
          */
         public boolean hasMainInstance() {
-            return (main != null);
+            return main != null;
         }
 
         /**
          * @return <code>true</code> if Sys instance is available, otherwise <code>false</code>.
          */
         public boolean hasSysInstance() {
-            return (sys != null);
+            return sys != null;
         }
 
         /**
          * @return <code>true</code> if Wind instance is available, otherwise <code>false</code>.
          */
         public boolean hasWindInstance() {
-            return (wind != null);
+            return wind != null;
         }
 
         public String getDateTimeText() {
@@ -253,9 +253,9 @@ public class HourlyForecast extends AbstractForecast {
          * @since 2.5.0.1
          */
         public static class Main extends AbstractForecast.Forecast.Main {
-            private final String JSON_MAIN_SEA_LEVEL = "sea_level";
-            private final String JSON_MAIN_GRND_LEVEL = "grnd_level";
-            private final String JSON_MAIN_TMP_KF = "temp_kf";
+            private static final String JSON_MAIN_SEA_LEVEL = "sea_level";
+            private static final String JSON_MAIN_GRND_LEVEL = "grnd_level";
+            private static final String JSON_MAIN_TMP_KF = "temp_kf";
 
             private final float seaLevel;
             private final float groundLevel;
@@ -272,21 +272,21 @@ public class HourlyForecast extends AbstractForecast {
             Main(JSONObject jsonObj) {
                 super(jsonObj);
 
-                this.seaLevel = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_MAIN_SEA_LEVEL, Float.NaN) : Float.NaN;
-                this.groundLevel = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_MAIN_GRND_LEVEL, Float.NaN) : Float.NaN;
-                this.tempKF = (jsonObj != null) ? (float) jsonObj.optDouble(this.JSON_MAIN_TMP_KF, Float.NaN) : Float.NaN;
+                this.seaLevel = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_MAIN_SEA_LEVEL, Float.NaN) : Float.NaN;
+                this.groundLevel = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_MAIN_GRND_LEVEL, Float.NaN) : Float.NaN;
+                this.tempKF = (jsonObj != null) ? (float) jsonObj.optDouble(JSON_MAIN_TMP_KF, Float.NaN) : Float.NaN;
             }
 
             public boolean hasSeaLevel() {
-                return (this.seaLevel != Float.NaN);
+                return !Float.isNaN(this.seaLevel);
             }
 
             public boolean hasGroundLevel() {
-                return (this.groundLevel != Float.NaN);
+                return !Float.isNaN(this.groundLevel);
             }
 
             public boolean hasTempKF() {
-                return (this.tempKF != Float.NaN);
+                return !Float.isNaN(this.tempKF);
             }
 
             public float getSeaLevel() {
@@ -323,7 +323,8 @@ public class HourlyForecast extends AbstractForecast {
          * @since 2.5.0.1
          */
         public static class Sys implements Serializable {
-            private final String JSON_SYS_POD = "pod";
+            private static final String JSON_SYS_POD = "pod";
+
             private final String pod;
 
             Sys() {
@@ -331,11 +332,11 @@ public class HourlyForecast extends AbstractForecast {
             }
 
             Sys(JSONObject jsonObj) {
-                this.pod = (jsonObj != null) ? jsonObj.optString(this.JSON_SYS_POD, null) : null;
+                this.pod = (jsonObj != null) ? jsonObj.optString(JSON_SYS_POD, null) : null;
             }
 
             public boolean hasPod() {
-                return (this.pod != null && (!this.pod.equals("")));
+                return this.pod != null && (! "".equals(this.pod));
             }
 
             public String getPod() {

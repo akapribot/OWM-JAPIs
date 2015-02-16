@@ -6,7 +6,7 @@ sourceCompatibility = 1.5
 
 group = 'net.aksingh'
 archivesBaseName = "owm-japis"
-version = '2.5.0.4'
+version = '2.5.0.5'
 
 repositories {
     mavenCentral()
