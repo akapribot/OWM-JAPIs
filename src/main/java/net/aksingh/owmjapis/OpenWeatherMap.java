@@ -29,9 +29,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.net.*;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
@@ -82,6 +80,7 @@ public class OpenWeatherMap {
      */
     private final OWMAddress owmAddress;
     private final OWMResponse owmResponse;
+    private final OWMProxy owmProxy;
 
     /**
      * Constructor
@@ -118,7 +117,8 @@ public class OpenWeatherMap {
      */
     public OpenWeatherMap(Units units, Language lang, String apiKey) {
         this.owmAddress = new OWMAddress(units, lang, apiKey);
-        this.owmResponse = new OWMResponse(owmAddress);
+        this.owmProxy = new OWMProxy(null, Integer.MIN_VALUE, null, null);
+        this.owmResponse = new OWMResponse(owmAddress, owmProxy);
     }
 
     /*
@@ -177,6 +177,34 @@ public class OpenWeatherMap {
      */
     public void setLang(Language lang) {
         owmAddress.setLang(lang);
+    }
+
+    /**
+     * Set proxy for getting data from OWM.org
+     *
+     * @param ip IP address of the proxy
+     * @param port Port address of the proxy
+     */
+    public void setProxy(String ip, int port) {
+        owmProxy.setIp(ip);
+        owmProxy.setPort(port);
+        owmProxy.setUser(null);
+        owmProxy.setPass(null);
+    }
+
+    /**
+     * Set proxy and authentication details for getting data from OWM.org
+     *
+     * @param ip IP address of the proxy
+     * @param port Port address of the proxy
+     * @param user User name for the proxy if required
+     * @param pass Password for the proxy if required
+     */
+    public void setProxy(String ip, int port, String user, String pass) {
+        owmProxy.setIp(ip);
+        owmProxy.setPort(port);
+        owmProxy.setUser(user);
+        owmProxy.setPass(pass);
     }
 
     public CurrentWeather currentWeatherByCityName(String cityName)
@@ -315,6 +343,66 @@ public class OpenWeatherMap {
 
         Language(String lang) {
             this.lang = lang;
+        }
+    }
+
+    /**
+     * Proxifies the default HTTP requests
+     *
+     * @since 2.5.0.5
+     */
+    private static class OWMProxy {
+        private String ip;
+        private int port;
+        private String user;
+        private String pass;
+
+        private OWMProxy(String ip, int port, String user, String pass) {
+            this.ip = ip;
+            this.port = port;
+            this.user = user;
+            this.pass = pass;
+        }
+
+        public Proxy getProxy() {
+            Proxy proxy = null;
+
+            if (ip != null && (! "".equals(ip)) && port != Integer.MIN_VALUE) {
+                proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(ip, port));
+            }
+
+            if (user != null && (! "".equals(user)) && pass != null && (! "".equals(pass))) {
+                Authenticator.setDefault(getAuthenticatorInstance(user, pass));
+            }
+
+            return proxy;
+        }
+
+        private Authenticator getAuthenticatorInstance(final String user, final String pass) {
+            Authenticator authenticator = new Authenticator() {
+
+                public PasswordAuthentication getPasswordAuthentication() {
+                    return (new PasswordAuthentication(user, pass.toCharArray()));
+                }
+            };
+
+            return authenticator;
+        }
+
+        public void setIp(String ip) {
+            this.ip = ip;
+        }
+
+        public void setPort(int port) {
+            this.port = port;
+        }
+
+        public void setUser(String user) {
+            this.user = user;
+        }
+
+        public void setPass(String pass) {
+            this.pass = pass;
         }
     }
 
@@ -523,9 +611,11 @@ public class OpenWeatherMap {
      */
     private static class OWMResponse {
         private final OWMAddress owmAddress;
+        private final OWMProxy owmProxy;
 
-        private OWMResponse(OWMAddress owmAddress) {
+        public OWMResponse(OWMAddress owmAddress, OWMProxy owmProxy) {
             this.owmAddress = owmAddress;
+            this.owmProxy = owmProxy;
         }
 
         /*
@@ -614,7 +704,12 @@ public class OpenWeatherMap {
 
             try {
                 request = new URL(requestAddress);
-                connection = (HttpURLConnection) request.openConnection();
+
+                if (owmProxy.getProxy() != null) {
+                    connection = (HttpURLConnection) request.openConnection(owmProxy.getProxy());
+                } else {
+                    connection = (HttpURLConnection) request.openConnection();
+                }
 
                 connection.setRequestMethod("GET");
                 connection.setUseCaches(false);
