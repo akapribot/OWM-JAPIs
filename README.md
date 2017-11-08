@@ -2,6 +2,9 @@
 
 ####Java Library for OpenWeatherMap.org Weather APIs
 
+NOTE: This lib. and repo. is deprecated. Check new, updated lib. and repo. at http://go.aksingh.net/owm-japis
+=
+
 OWM JAPIs lets you develop weather-aware applications for **Java and Android platforms** in minimum time using OWM JAPIs, an easy-to-use, detailed and documented weather APIs' wrapper library for retrieving weather data from OpenWeatherMap.org. You can easily **retrieve and use weather data** in your applications using this library.
 
 OWM JAPIs allows you to **fetch weather data in only 3-5 lines of code** (excluding any other/skeleton code, of course). You can develop applications and services for multiple platforms using this library, such as Windows, Mac OS X, Linux, and Android.
