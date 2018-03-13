@@ -311,6 +311,10 @@ public class OpenWeatherMap {
         Units(String unit) {
             this.unit = unit;
         }
+        
+        public String getCode(){
+        	return this.unit;
+        }
     }
 
     /**
@@ -330,7 +334,7 @@ public class OpenWeatherMap {
         POLISH("pl"),
         FINNISH("fi"),
         DUTCH("nl"),
-        FRENCH("FR"),
+        FRENCH("fr"),
         BULGARIAN("bg"),
         SWEDISH("sv"),
         CHINESE_TRADITIONAL("zh_tw"),
@@ -343,6 +347,10 @@ public class OpenWeatherMap {
 
         Language(String lang) {
             this.lang = lang;
+        }
+        
+        public String getCode(){
+        	return this.lang;
         }
     }
 
@@ -480,8 +488,8 @@ public class OpenWeatherMap {
                     .append(URL_API).append(URL_CURRENT)
                     .append(PARAM_CITY_NAME).append(URLEncoder.encode(cityName, ENCODING)).append("&")
                     .append(PARAM_MODE).append(this.mode).append("&")
-                    .append(PARAM_UNITS).append(this.units).append("&")
-                    .append(PARAM_LANG).append(this.lang).append("&")
+                    .append(PARAM_UNITS).append(this.units.getCode()).append("&")
+                    .append(PARAM_LANG).append(this.lang.getCode()).append("&")
                     .append(PARAM_APPID).append(this.appId)
                     .toString();
         }
@@ -497,8 +505,8 @@ public class OpenWeatherMap {
                     .append(URL_API).append(URL_CURRENT)
                     .append(PARAM_CITY_ID).append(Long.toString(cityCode)).append("&")
                     .append(PARAM_MODE).append(this.mode).append("&")
-                    .append(PARAM_UNITS).append(this.units).append("&")
-                    .append(PARAM_LANG).append(this.lang).append("&")
+                    .append(PARAM_UNITS).append(this.units.getCode()).append("&")
+                    .append(PARAM_LANG).append(this.lang.getCode()).append("&")
                     .append(PARAM_APPID).append(this.appId)
                     .toString();
         }
@@ -509,7 +517,7 @@ public class OpenWeatherMap {
                     .append(PARAM_LATITUDE).append(Float.toString(latitude)).append("&")
                     .append(PARAM_LONGITUDE).append(Float.toString(longitude)).append("&")
                     .append(PARAM_MODE).append(this.mode).append("&")
-                    .append(PARAM_UNITS).append(this.units).append("&")
+                    .append(PARAM_UNITS).append(this.units.getCode()).append("&")
                     .append(PARAM_APPID).append(this.appId)
                     .toString();
         }
@@ -522,8 +530,8 @@ public class OpenWeatherMap {
                     .append(URL_API).append(URL_HOURLY_FORECAST)
                     .append(PARAM_CITY_NAME).append(URLEncoder.encode(cityName, ENCODING)).append("&")
                     .append(PARAM_MODE).append(this.mode).append("&")
-                    .append(PARAM_UNITS).append(this.units).append("&")
-                    .append(PARAM_LANG).append(this.lang).append("&")
+                    .append(PARAM_UNITS).append(this.units.getCode()).append("&")
+                    .append(PARAM_LANG).append(this.lang.getCode()).append("&")
                     .append(PARAM_APPID).append(this.appId)
                     .toString();
         }
@@ -539,8 +547,8 @@ public class OpenWeatherMap {
                     .append(URL_API).append(URL_HOURLY_FORECAST)
                     .append(PARAM_CITY_ID).append(Long.toString(cityCode)).append("&")
                     .append(PARAM_MODE).append(this.mode).append("&")
-                    .append(PARAM_UNITS).append(this.units).append("&")
-                    .append(PARAM_LANG).append(this.lang).append("&")
+                    .append(PARAM_UNITS).append(this.units.getCode()).append("&")
+                    .append(PARAM_LANG).append(this.lang.getCode()).append("&")
                     .append(PARAM_APPID).append(this.appId)
                     .toString();
         }
@@ -551,8 +559,8 @@ public class OpenWeatherMap {
                     .append(PARAM_LATITUDE).append(Float.toString(latitude)).append("&")
                     .append(PARAM_LONGITUDE).append(Float.toString(longitude)).append("&")
                     .append(PARAM_MODE).append(this.mode).append("&")
-                    .append(PARAM_UNITS).append(this.units).append("&")
-                    .append(PARAM_LANG).append(this.lang).append("&")
+                    .append(PARAM_UNITS).append(this.units.getCode()).append("&")
+                    .append(PARAM_LANG).append(this.lang.getCode()).append("&")
                     .append(PARAM_APPID).append(this.appId)
                     .toString();
         }
@@ -566,8 +574,8 @@ public class OpenWeatherMap {
                     .append(PARAM_CITY_NAME).append(URLEncoder.encode(cityName, ENCODING)).append("&")
                     .append(PARAM_COUNT).append(Byte.toString(count)).append("&")
                     .append(PARAM_MODE).append(this.mode).append("&")
-                    .append(PARAM_UNITS).append(this.units).append("&")
-                    .append(PARAM_LANG).append(this.lang).append("&")
+                    .append(PARAM_UNITS).append(this.units.getCode()).append("&")
+                    .append(PARAM_LANG).append(this.lang.getCode()).append("&")
                     .append(PARAM_APPID).append(this.appId)
                     .toString();
         }
@@ -584,8 +592,8 @@ public class OpenWeatherMap {
                     .append(PARAM_CITY_ID).append(Long.toString(cityCode)).append("&")
                     .append(PARAM_COUNT).append(Byte.toString(count)).append("&")
                     .append(PARAM_MODE).append(this.mode).append("&")
-                    .append(PARAM_UNITS).append(this.units).append("&")
-                    .append(PARAM_LANG).append(this.lang).append("&")
+                    .append(PARAM_UNITS).append(this.units.getCode()).append("&")
+                    .append(PARAM_LANG).append(this.lang.getCode()).append("&")
                     .append(PARAM_APPID).append(this.appId)
                     .toString();
         }
@@ -597,8 +605,8 @@ public class OpenWeatherMap {
                     .append(PARAM_LONGITUDE).append(Float.toString(longitude)).append("&")
                     .append(PARAM_COUNT).append(Byte.toString(count)).append("&")
                     .append(PARAM_MODE).append(this.mode).append("&")
-                    .append(PARAM_UNITS).append(this.units).append("&")
-                    .append(PARAM_LANG).append(this.lang).append("&")
+                    .append(PARAM_UNITS).append(this.units.getCode()).append("&")
+                    .append(PARAM_LANG).append(this.lang.getCode()).append("&")
                     .append(PARAM_APPID).append(this.appId)
                     .toString();
         }
